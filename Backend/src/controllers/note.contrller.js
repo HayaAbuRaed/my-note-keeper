@@ -31,3 +31,21 @@ export const addNote = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const updateNote = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    !req.body && res.status(400).json({ message: "Nothing to update" });
+
+    const note = await Note.findByIdAndUpdate(id, req.body);
+
+    !note && res.status(404).json({ message: "Note not found" });
+
+    const updatedNote = await Note.findById(id);
+
+    res.status(200).json(updatedNote);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
