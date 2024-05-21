@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_URL || "https://api.example.com";
+const BASE_URL = process.env.REACT_APP_API_URL || "";
 
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -16,11 +16,13 @@ export const apiRequest = async (endpoint, method = 'GET', body = null, headers 
             'Content-Type': 'application/json',
             ...headers,
         },
+        mode: 'no-cors',
     };
     if (body) {
         options.body = JSON.stringify(body);
     }
     const response = await fetch(`${BASE_URL}${endpoint}`, options);
+    console.log(response);
     return handleResponse(response);
 };
 
