@@ -2,13 +2,8 @@ import React from "react";
 import Note from "../../../components/Note";
 import styles from "../styles.module.css";
 import { getRandomColor } from "../../../utils";
-import useGetNotes from "../hooks/useGetNotes";
 
-const NotesList = () => {
-  const { notes, isFetching } = useGetNotes();
-
-  if (isFetching) return <p>Loading...</p>;
-
+const NotesList = ({ notes }) => {
   if (!notes) return <p>No notes.</p>;
 
   return (

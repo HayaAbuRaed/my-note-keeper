@@ -47,6 +47,12 @@
   color: white;
 }
 
+.disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: auto;
+}
+
 .buttonIcon {
   font-size: 0.75rem;
   padding-right: 0.25rem;

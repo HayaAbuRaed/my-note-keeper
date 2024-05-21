@@ -2,9 +2,8 @@ import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styles from "../styles.module.css";
-import { createNote } from "../API";
 
-const AddTaskCard = () => {
+const AddTaskCard = ({ onAddNote }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [formData, setFormData] = useState({ title: "", content: "" });
 
@@ -24,12 +23,18 @@ const AddTaskCard = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createNote(formData);
+  const handleClose = () => {
     setFormData({ title: "", content: "" });
     setIsExpanded(false);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddNote(formData);
+    handleClose();
+  };
+
+  const isDisabled = !formData.title || !formData.content;
 
   return (
     <form
@@ -65,7 +70,10 @@ const AddTaskCard = () => {
         <div className={styles.buttonsContainer}>
           <button
             type="submit"
-            className={`${styles.button} ${styles.addButton}`}
+            className={`${styles.button} ${styles.addButton} ${
+              isDisabled && styles.disabled
+            }`}
+            disabled={isDisabled}
           >
             <FontAwesomeIcon icon={faPlus} className={styles.buttonIcon} />
             Add
@@ -73,7 +81,7 @@ const AddTaskCard = () => {
 
           <button
             type="button"
-            onClick={() => setIsExpanded(false)}
+            onClick={() => handleClose()}
             className={`${styles.button} ${styles.closeButton}`}
           >
             <FontAwesomeIcon icon={faXmark} className={styles.buttonIcon} />
