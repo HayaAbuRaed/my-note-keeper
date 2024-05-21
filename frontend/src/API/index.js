@@ -9,20 +9,22 @@ const handleResponse = async (response) => {
   return response.json();
 };
 
-export const apiRequest = async (endpoint, method = 'GET', body = null, headers = {}) => {
-    const options = {
-        method,
-        headers: {
-            'Content-Type': 'application/json',
-            ...headers,
-        },
-        mode: 'no-cors',
-    };
-    if (body) {
-        options.body = JSON.stringify(body);
-    }
-    const response = await fetch(`${BASE_URL}${endpoint}`, options);
-    console.log(response);
-    return handleResponse(response);
-};
+export const apiRequest = async (
+  endpoint,
+  method = "GET",
+  body = null,
+  headers = {}
+) => {
+  const options = {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    },
+    body: body ? JSON.stringify(body) : null,
+  };
 
+  const response = await fetch(`${BASE_URL}${endpoint}`, options);
+
+  return handleResponse(response);
+};

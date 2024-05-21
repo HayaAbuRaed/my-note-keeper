@@ -7,8 +7,6 @@ import useGetNotes from "../hooks/useGetNotes";
 const NotesList = () => {
   const { notes, isFetching } = useGetNotes();
 
-  console.log(notes);
-
   if (isFetching) return <p>Loading...</p>;
 
   if (!notes) return <p>No notes.</p>;
