@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_URL || "";
+const BASE_URL = "https://notes-keeper-do4x.onrender.com";
 
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -23,6 +23,8 @@ export const apiRequest = async (
     },
     body: body ? JSON.stringify(body) : null,
   };
+
+  console.log("URL", BASE_URL);
 
   const response = await fetch(`${BASE_URL}${endpoint}`, options);
 
