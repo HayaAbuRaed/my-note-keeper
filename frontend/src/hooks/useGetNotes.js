@@ -1,5 +1,5 @@
-import { getNotes } from "../API";
-import useFetch from "../../../hooks";
+import { getNotes } from "../API/getNotes";
+import useFetch from "../hooks";
 
 const useGetNotes = () => {
   const { data, loading, error } = useFetch(getNotes);

@@ -1,6 +1,7 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import NotesContext from "./NotesContext";
 import notesReducer from "./notesReducer";
+import useGetNotes from "../../hooks/useGetNotes";
 
 const initialState = {
   notes: [],
@@ -8,6 +9,12 @@ const initialState = {
 
 const NotesProvider = ({ children }) => {
   const [state, dispatch] = useReducer(notesReducer, initialState);
+
+  const { notes: fetchedNotes, isFetching } = useGetNotes();
+
+  useEffect(() => {
+    fetchedNotes && setNotes(fetchedNotes.reverse());
+  }, [fetchedNotes]);
 
   const addNote = (note) => {
     dispatch({ type: "ADD_NOTE", payload: note });
@@ -27,7 +34,15 @@ const NotesProvider = ({ children }) => {
 
   return (
     <NotesContext.Provider
-      value={{ notes: state.notes, addNote, removeNote, updateNote, setNotes }}
+      value={{
+        originalNotes: fetchedNotes && fetchedNotes.reverse(),
+        isFetching,
+        notes: state.notes,
+        addNote,
+        removeNote,
+        updateNote,
+        setNotes,
+      }}
     >
       {children}
     </NotesContext.Provider>
