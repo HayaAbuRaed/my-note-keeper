@@ -3,11 +3,13 @@
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
+  padding-bottom: 6rem;
 }
 
-.noteContainer {
+.notesContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -44,6 +46,12 @@
 .closeButton {
   background-color: #f44336;
   color: white;
+}
+
+.disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: auto;
 }
 
 .buttonIcon {

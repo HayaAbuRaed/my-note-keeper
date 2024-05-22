@@ -1,4 +1,6 @@
 .navContainer {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(0.625rem);
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -48,4 +50,18 @@
 .searchIcon {
   font-size: 0.85rem;
   color: gray;
+}
+
+@media screen and (max-width: 400px) {
+  .navContainer {
+    padding-inline: 0.9rem;
+  }
+
+  .heading {
+    font-size: 0.95rem;
+  }
+
+  .noteIcon {
+    display: none;
+  }
 }

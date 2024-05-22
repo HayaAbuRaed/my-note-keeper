@@ -3,10 +3,29 @@ import {
   faNoteSticky,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./styles.module.css";
+import { NotesContext } from "../../contexts";
 
 const Navbar = () => {
+  const { originalNotes, setNotes } = useContext(NotesContext);
+
+  const handleSearch = (e) => {
+    const searchQuery = e.target.value.trim();
+
+    let filteredNotes = [];
+
+    if (!searchQuery) filteredNotes = originalNotes;
+    else
+      filteredNotes = originalNotes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          note.content.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+    setNotes(filteredNotes);
+  };
+
   return (
     <div className={styles.navContainer}>
       <h1 className={styles.heading}>
@@ -23,6 +42,7 @@ const Navbar = () => {
           type="search"
           placeholder={"Search notes"}
           className={styles.search}
+          onChange={handleSearch}
         />
       </div>
     </div>

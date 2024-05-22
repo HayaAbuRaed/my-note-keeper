@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_URL || "https://api.example.com";
+const BASE_URL = process.env.REACT_APP_API_URL || "";
 
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -9,18 +9,22 @@ const handleResponse = async (response) => {
   return response.json();
 };
 
-export const apiRequest = async (endpoint, method = 'GET', body = null, headers = {}) => {
-    const options = {
-        method,
-        headers: {
-            'Content-Type': 'application/json',
-            ...headers,
-        },
-    };
-    if (body) {
-        options.body = JSON.stringify(body);
-    }
-    const response = await fetch(`${BASE_URL}${endpoint}`, options);
-    return handleResponse(response);
-};
+export const apiRequest = async (
+  endpoint,
+  method = "GET",
+  body = null,
+  headers = {}
+) => {
+  const options = {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      ...headers,
+    },
+    body: body ? JSON.stringify(body) : null,
+  };
 
+  const response = await fetch(`${BASE_URL}${endpoint}`, options);
+
+  return handleResponse(response);
+};

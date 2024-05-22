@@ -7,6 +7,7 @@
   gap: 1rem;
   padding: 1rem 1.2rem;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .noteContainer * {
@@ -18,15 +19,26 @@
   border-radius: 1rem;
   padding: 0.2rem 1rem;
   width: fit-content;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.trashIcon {
-  color: #333;
+.calenderIcon {
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.iconButton {
+  background-color: transparent;
+  color: #444;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
   margin-left: auto;
   margin-top: auto;
-  cursor: pointer;
 }
 
-.trashIcon:hover {
+.iconButton:hover {
   color: rgba(51, 51, 51, 0.65);
 }

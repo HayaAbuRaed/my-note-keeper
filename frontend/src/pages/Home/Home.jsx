@@ -1,12 +1,13 @@
 import React from "react";
-import NotesList from "./components/NotesList";
 import AddTaskCard from "./components/AddTaskCard";
+import NotesList from "./components/NotesList";
 import styles from "./styles.module.css";
 
 const Home = () => {
   return (
     <div className={styles.homeContainer}>
       <AddTaskCard />
+
       <NotesList />
     </div>
   );

@@ -1,35 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import Note from "../../../components/Note";
+import { NotesContext } from "../../../contexts";
 import styles from "../styles.module.css";
-import { getRandomColor } from "../../../utils";
+import NotesListSkeleton from "./NotesListSkeleton";
 
 const NotesList = () => {
-  const notes = [
-    {
-      id: 1,
-      title: "Note Title",
-      content: "Note Content",
-      date: "2021-09-01",
-    },
-    {
-      id: 2,
-      title: "Note Title",
-      content: "Note Content",
-      date: "2021-09-01",
-    },
-    {
-      id: 3,
-      title: "Note Title",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec.",
-      date: "2021-09-01",
-    },
-  ];
+  const { notes, isFetching } = useContext(NotesContext);
+
+  if (isFetching) return <NotesListSkeleton />;
+
+  if (!notes.length) return <p>No notes.</p>;
 
   return (
-    <div className={styles.noteContainer}>
+    <div className={styles.notesContainer}>
       {notes.map((note) => (
-        <Note key={note.id} note={note} color={getRandomColor()} />
+        <Note key={note._id} note={note} />
       ))}
     </div>
   );

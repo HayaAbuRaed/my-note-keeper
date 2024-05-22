@@ -1,11 +1,12 @@
 import { Suspense } from "react";
-import publicRoutes from "./publicRoutes";
 import { useRoutes } from "react-router-dom";
+import publicRoutes from "./publicRoutes";
+import AppLoadingSkeleton from "../containers/LoadingSkeleton/AppLoadingSkeleton";
 
 const AppRoutes = () => {
   const appRoutes = useRoutes([publicRoutes]);
 
-  return <Suspense fallback={<h2>Loading...</h2>}>{appRoutes}</Suspense>;
+  return <Suspense fallback={<AppLoadingSkeleton />}>{appRoutes}</Suspense>;
 };
 
 export default AppRoutes;
