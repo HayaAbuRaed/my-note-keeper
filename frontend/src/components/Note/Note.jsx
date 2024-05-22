@@ -9,13 +9,13 @@ import { DIALOG_TYPES } from "./types";
 import UpdateNoteDialog from "../../containers/Dialogs/UpdateNoteDialog";
 import { NotesContext } from "../../contexts";
 
-const Note = ({ note, color }) => {
+const Note = ({ note }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [dialog, setDialog] = useState("");
 
   const { removeNote } = useContext(NotesContext);
 
-  const { _id: id, title, content, createdAt } = note;
+  const { _id: id, title, content, createdAt, color } = note;
 
   const date = formatDate(createdAt);
 

@@ -1,9 +1,11 @@
+import { matchNoteWithColor } from "../../utils";
+
 const notesReducer = (state, action) => {
   switch (action.type) {
     case "ADD_NOTE":
       return {
         ...state,
-        notes: [action.payload, ...state.notes],
+        notes: [matchNoteWithColor(action.payload), ...state.notes],
       };
     case "REMOVE_NOTE":
       return {
@@ -14,7 +16,9 @@ const notesReducer = (state, action) => {
       return {
         ...state,
         notes: state.notes.map((note) =>
-          note._id === action.payload.id ? action.payload.updatedNote : note
+          note._id === action.payload.id
+            ? { ...action.payload.updatedNote, color: note.color }
+            : note
         ),
       };
     case "SET_NOTES":

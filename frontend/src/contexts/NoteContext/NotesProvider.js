@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import NotesContext from "./NotesContext";
 import notesReducer from "./notesReducer";
 import useGetNotes from "../../hooks/useGetNotes";
+import { matchNotesWithColors } from "../../utils";
 
 const initialState = {
   notes: [],
@@ -13,7 +14,8 @@ const NotesProvider = ({ children }) => {
   const { notes: fetchedNotes, isFetching } = useGetNotes();
 
   useEffect(() => {
-    fetchedNotes && setNotes(fetchedNotes.reverse());
+    console.log("fetchedNotes", fetchedNotes);
+    fetchedNotes && setNotes(matchNotesWithColors(fetchedNotes.reverse()));
   }, [fetchedNotes]);
 
   const addNote = (note) => {
@@ -35,7 +37,7 @@ const NotesProvider = ({ children }) => {
   return (
     <NotesContext.Provider
       value={{
-        originalNotes: fetchedNotes && fetchedNotes.reverse(),
+        originalNotes: fetchedNotes && matchNotesWithColors(fetchedNotes.reverse()),
         isFetching,
         notes: state.notes,
         addNote,
