@@ -5,10 +5,12 @@ import ConfirmDialog from "../../containers/Dialogs/ConfirmDialog";
 import { formatDate } from "../../utils";
 import { deleteNote } from "./API";
 import styles from "./styles.module.css";
+import { DIALOG_TYPES } from "./types";
+import UpdateNoteDialog from "../../containers/Dialogs/UpdateNoteDialog";
 
 const Note = ({ note, color, setNotes }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isConfirmDialogOpen, setIsConfirmDialogOpen] = useState(false);
+  const [dialog, setDialog] = useState("");
 
   const { _id: id, title, content, createdAt } = note;
 
@@ -18,18 +20,23 @@ const Note = ({ note, color, setNotes }) => {
 
   const handleMouseLeave = () => setIsHovered(false);
 
-  const handleDelete = async () => {
-    setIsConfirmDialogOpen(true);
+  const handleDelete = async (e) => {
+    e.stopPropagation();
+    setDialog(DIALOG_TYPES.CONFIRM);
   };
 
   const confirmDelete = async () => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
-    setIsConfirmDialogOpen(false);
+    setDialog("");
     await deleteNote(id);
+    setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
   };
 
-  const cancelDelete = () => {
-    setIsConfirmDialogOpen(false);
+  const handleCancel = () => {
+    setDialog("");
+  };
+
+  const handleNoteClick = () => {
+    dialog !== DIALOG_TYPES.CONFIRM && setDialog(DIALOG_TYPES.UPDATE);
   };
 
   return (
@@ -38,6 +45,7 @@ const Note = ({ note, color, setNotes }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{ backgroundColor: color }}
+      onClick={handleNoteClick}
     >
       <h3>{title}</h3>
       <p>{content}</p>
@@ -54,11 +62,19 @@ const Note = ({ note, color, setNotes }) => {
         <FontAwesomeIcon icon={faTrash} />
       </button>
 
-      {isConfirmDialogOpen && (
+      {dialog === DIALOG_TYPES.CONFIRM && (
         <ConfirmDialog
-          message="Are you sure you want to delete this note?"
+          message="⚠️ Are you sure you want to delete this note?"
           onConfirm={confirmDelete}
-          onCancel={cancelDelete}
+          onCancel={handleCancel}
+        />
+      )}
+
+      {dialog === DIALOG_TYPES.UPDATE && (
+        <UpdateNoteDialog
+          note={note}
+          setNotes={setNotes}
+          onCancel={handleCancel}
         />
       )}
     </div>
