@@ -12,7 +12,5 @@ export const formatDate = (date) => {
     year: "numeric",
   });
 
-  return {
-    date: dateStr,
-  };
+  return dateStr;
 };

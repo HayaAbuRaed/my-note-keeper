@@ -23,18 +23,21 @@
   align-items: center;
 }
 
-.trashIcon {
-  color: #333;
-  margin-left: auto;
-  margin-top: auto;
-  cursor: pointer;
-}
-
-.trashIcon:hover {
-  color: rgba(51, 51, 51, 0.65);
-}
-
 .calenderIcon {
   color: #555;
   font-size: 0.8rem;
+}
+
+.iconButton {
+  background-color: transparent;
+  color: #444;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+  margin-left: auto;
+  margin-top: auto;
+}
+
+.iconButton:hover {
+  color: rgba(51, 51, 51, 0.65);
 }

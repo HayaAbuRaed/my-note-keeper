@@ -2,8 +2,9 @@ import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import styles from "../styles.module.css";
+import { createNote } from "../API";
 
-const AddTaskCard = ({ onAddNote }) => {
+const AddTaskCard = ({ setNotes }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [formData, setFormData] = useState({ title: "", content: "" });
 
@@ -28,9 +29,10 @@ const AddTaskCard = ({ onAddNote }) => {
     setIsExpanded(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddNote(formData);
+    const newNote = await createNote(formData);
+    setNotes((prevNotes) => [newNote, ...prevNotes]);
     handleClose();
   };
 
