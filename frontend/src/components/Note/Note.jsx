@@ -1,16 +1,19 @@
 import { faCalendarAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ConfirmDialog from "../../containers/Dialogs/ConfirmDialog";
 import { formatDate } from "../../utils";
-import { deleteNote } from "./API";
+import { deleteNote as deleteNoteAPI } from "./API";
 import styles from "./styles.module.css";
 import { DIALOG_TYPES } from "./types";
 import UpdateNoteDialog from "../../containers/Dialogs/UpdateNoteDialog";
+import { NotesContext } from "../../contexts";
 
-const Note = ({ note, color, setNotes }) => {
+const Note = ({ note, color }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [dialog, setDialog] = useState("");
+
+  const { removeNote } = useContext(NotesContext);
 
   const { _id: id, title, content, createdAt } = note;
 
@@ -27,8 +30,8 @@ const Note = ({ note, color, setNotes }) => {
 
   const confirmDelete = async () => {
     setDialog("");
-    await deleteNote(id);
-    setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
+    await deleteNoteAPI(id);
+    removeNote(id);
   };
 
   const handleCancel = () => {
@@ -71,11 +74,7 @@ const Note = ({ note, color, setNotes }) => {
       )}
 
       {dialog === DIALOG_TYPES.UPDATE && (
-        <UpdateNoteDialog
-          note={note}
-          setNotes={setNotes}
-          onCancel={handleCancel}
-        />
+        <UpdateNoteDialog note={note} onCancel={handleCancel} />
       )}
     </div>
   );

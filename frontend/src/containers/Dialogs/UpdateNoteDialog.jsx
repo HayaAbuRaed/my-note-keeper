@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./styles.module.css";
-import { updateNote } from "./API";
+import { updateNote as updateNoteAPI } from "./API";
+import { NotesContext } from "../../contexts";
 
-const UpdateNoteDialog = ({ note, setNotes, onCancel }) => {
+const UpdateNoteDialog = ({ note, onCancel }) => {
   const [formData, setFormData] = useState({
     title: note.title,
     content: note.content,
   });
+
+  const { updateNote } = useContext(NotesContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,10 +26,8 @@ const UpdateNoteDialog = ({ note, setNotes, onCancel }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    updateNote(note._id, formData);
-    setNotes((prevNotes) =>
-      prevNotes.map((n) => (n._id === note._id ? { ...n, ...formData } : n))
-    );
+    const newNote = await updateNoteAPI(note._id, formData);
+    updateNote(note._id, newNote);
     handleClose();
   };
 
