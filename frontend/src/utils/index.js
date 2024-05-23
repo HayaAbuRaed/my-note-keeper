@@ -11,10 +11,12 @@ export const formatDate = (date) => {
 };
 
 export const matchNotesWithColors = (notes) => {
-  return notes.map((note, index) => ({
-    ...note,
-    color: colorPalette[index % colorPalette.length],
-  }));
+  return notes
+    .map((note, index) => ({
+      ...note,
+      color: colorPalette[index % colorPalette.length],
+    }))
+    .reverse();
 };
 
 export const matchNoteWithColor = (note) => {
