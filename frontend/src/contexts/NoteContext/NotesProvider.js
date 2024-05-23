@@ -6,6 +6,7 @@ import { matchNotesWithColors } from "../../utils";
 
 const initialState = {
   notes: [],
+  query: "",
 };
 
 const NotesProvider = ({ children }) => {
@@ -14,8 +15,7 @@ const NotesProvider = ({ children }) => {
   const { notes: fetchedNotes, isFetching } = useGetNotes();
 
   useEffect(() => {
-    console.log("fetchedNotes", fetchedNotes);
-    fetchedNotes && setNotes(matchNotesWithColors(fetchedNotes.reverse()));
+    fetchedNotes && setNotes(matchNotesWithColors(fetchedNotes));
   }, [fetchedNotes]);
 
   const addNote = (note) => {
@@ -34,16 +34,21 @@ const NotesProvider = ({ children }) => {
     dispatch({ type: "SET_NOTES", payload: notes });
   };
 
+  const setQuery = (query) => {
+    dispatch({ type: "SET_QUERY", payload: query });
+  };
+
   return (
     <NotesContext.Provider
       value={{
-        originalNotes: fetchedNotes && matchNotesWithColors(fetchedNotes.reverse()),
         isFetching,
         notes: state.notes,
+        query: state.query,
         addNote,
         removeNote,
         updateNote,
         setNotes,
+        setQuery,
       }}
     >
       {children}

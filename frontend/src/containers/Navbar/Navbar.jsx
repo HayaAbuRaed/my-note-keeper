@@ -8,22 +8,11 @@ import styles from "./styles.module.css";
 import { NotesContext } from "../../contexts";
 
 const Navbar = () => {
-  const { originalNotes, setNotes } = useContext(NotesContext);
+  const { setQuery } = useContext(NotesContext);
 
   const handleSearch = (e) => {
     const searchQuery = e.target.value.trim();
-
-    let filteredNotes = [];
-
-    if (!searchQuery) filteredNotes = originalNotes;
-    else
-      filteredNotes = originalNotes.filter(
-        (note) =>
-          note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          note.content.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-
-    setNotes(filteredNotes);
+    searchQuery ? setQuery(searchQuery) : setQuery("");
   };
 
   return (

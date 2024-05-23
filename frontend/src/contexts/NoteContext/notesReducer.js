@@ -26,6 +26,11 @@ const notesReducer = (state, action) => {
         ...state,
         notes: action.payload,
       };
+    case "SET_QUERY":
+      return {
+        ...state,
+        query: action.payload,
+      };
     default:
       return state;
   }
