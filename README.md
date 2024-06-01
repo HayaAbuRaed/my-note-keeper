@@ -30,7 +30,9 @@ Welcome to the Note Keeping Application! This repository contains a full-stack a
 - Paginate the list of notes.
 - User-friendly interface with dialogs for adding, updating, and deleting notes.
 
-<br />  <br />
+<br /> 
+<i> Project Sections: </i>
+<br />
 
 ## 🔧 Backend
 
