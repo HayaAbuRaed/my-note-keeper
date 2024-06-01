@@ -1,13 +1,14 @@
 # My Note Keeper Application
 Welcome to the Note Keeping Application! This repository contains a full-stack application built with Node.js, Express.js, MongoDB for the backend, and React.js for the frontend. The application allows users to perform CRUD operations on notes.
 
-<br /> <br />
+<br />
+
 
 <div align="center">
   <img src="https://github.com/HayaAbuRaed/my-note-keeper/assets/123592435/c9a48c66-71da-4cf3-82d7-b8268d7a3fb2" alt="view" width=500/>
 </div>
 
-<br /> <br />
+<br />
 
 
 <!-- ## 📚 Table of Contents
