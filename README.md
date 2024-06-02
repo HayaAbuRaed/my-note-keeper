@@ -38,7 +38,8 @@ Welcome to the Note Keeping Application! This repository contains a full-stack a
 
 The backend is built with ![Static Badge](https://img.shields.io/badge/Node.js-blue?style=flat-square&logo=Node.js&logoColor=%23417e38&labelColor=%23f1f1f1&color=%23417e38)
 ,![Static Badge](https://img.shields.io/badge/Express.js-blue?style=flat-square&logo=Express&logoColor=%23838383&labelColor=%23f1f1f1&color=%23838383)
-, ![Static Badge](https://img.shields.io/badge/MongoDB-blue?style=flat-square&logo=MongoDB&labelColor=%23f1f1f1&color=%2307ac4f) , and ![Static Badge](https://img.shields.io/badge/nodemon-green?style=flat-square&logo=nodemon&labelColor=%23f1f1f1&color=%2376d04b)
+, ![Static Badge](https://img.shields.io/badge/MongoDB-blue?style=flat-square&logo=MongoDB&labelColor=%23f1f1f1&color=%2307ac4f) , ![Static Badge](https://img.shields.io/badge/Mongoose-any?style=flat-square&logo=Mongoose&logoColor=%23880000&labelColor=%23f1f1f1&color=%23880000)
+ , and ![Static Badge](https://img.shields.io/badge/nodemon-green?style=flat-square&logo=nodemon&labelColor=%23f1f1f1&color=%2376d04b)
  for development
 . <br />  <br />
 It provides a REST API for the note-keeping functionality.
